@@ -2,7 +2,7 @@ import { GoogleGenAI } from "@google/genai";
 
 export class GeminiService {
   async generateResponse(prompt: string, history: any[], imageBase64?: string) {
-    // Используем API_KEY из окружения
+    // API_KEY берется из process.env.API_KEY
     const ai = new GoogleGenAI({ apiKey: process.env.API_KEY as string });
     
     try {
@@ -37,7 +37,7 @@ export class GeminiService {
         }
       });
 
-      // .text — это свойство (getter), а не метод
+      // В новом SDK .text — это getter, а не метод.
       return response.text || "Не удалось получить ответ.";
     } catch (error: any) {
       console.error("Gemini API Error:", error);
