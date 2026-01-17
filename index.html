@@ -2,26 +2,51 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>CeloraAI | Intelligent Assistant</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    body { font-family: 'Plus Jakarta Sans', sans-serif; transition: background-color 0.5s ease; margin: 0; overflow: hidden; }
-    .glass { backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
-    .element-gradient-text {
-      background: linear-gradient(to right, #6366F1, #A855F7, #EC4899);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+    :root {
+      --sat: env(safe-area-inset-top);
+      --sab: env(safe-area-inset-bottom);
     }
+    body { 
+      font-family: 'Plus Jakarta Sans', sans-serif; 
+      transition: background-color 0.5s ease; 
+      margin: 0; 
+      overflow: hidden;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+    .glass { backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
     .dark body { background-color: #050505; color: #f8fafc; }
     body:not(.dark) { background-color: #f8fafc; color: #0f172a; }
-    ::-webkit-scrollbar { width: 4px; }
-    ::-webkit-scrollbar-thumb { background: #6366f144; border-radius: 10px; }
-    .animate-fade-in { animation: fadeIn 0.5s ease-out; }
+    
+    /* Стили для мобильного скролла */
+    ::-webkit-scrollbar { width: 0px; height: 0px; }
+    
+    .safe-top { padding-top: var(--sat); }
+    .safe-bottom { padding-bottom: var(--sab); }
+    
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-fade-in { animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+
+    /* Ограничение ширины на десктопе для эффекта мобильного приложения */
+    @media (min-width: 1024px) {
+      #root {
+        max-width: 450px;
+        margin: 0 auto;
+        box-shadow: 0 0 50px rgba(0,0,0,0.2);
+        height: 100vh;
+        position: relative;
+      }
+      body { background-color: #1a1a1a !important; }
+    }
   </style>
   <script type="importmap">
 {
