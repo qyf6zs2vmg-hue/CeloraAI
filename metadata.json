@@ -1,6 +1,6 @@
 {
   "name": "CeloraAI by Element Intelligent",
-  "description": "Next-gen AI platform with multi-modal inputs, voice interaction, and multi-language support.",
+  "description": "AI Chat with history, profile and support sections.",
   "requestFramePermissions": [
     "camera",
     "microphone"

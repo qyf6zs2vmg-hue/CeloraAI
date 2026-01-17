@@ -1,20 +1,24 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# CeloraAI - Интеллектуальный Ассистент
 
-# Run and deploy your AI Studio app
+Это приложение создано с использованием React (No-Build) и Gemini API.
 
-This contains everything you need to run your app locally.
+## Структура проекта
+- `index.html` — основной файл для запуска.
+- `App.tsx` — логика приложения.
+- `pages/` — компоненты страниц.
+- `services/` — логика ИИ и Firebase.
 
-View your app in AI Studio: https://ai.studio/apps/drive/1mu41C7wAEniQ2g_PRCR4uoDY3CoOjXjQ
+## Как запустить локально
+1. Скопируйте все файлы проекта в одну папку.
+2. Убедитесь, что структура папок (`pages/`, `services/`) сохранена.
+3. Используйте **VS Code Live Server** или команду `npx serve .`, чтобы открыть проект.
+   *Простое открытие index.html двойным кликом может не работать из-за ограничений безопасности браузера для ES-модулей.*
 
-## Run Locally
+## Бесплатный хостинг (GitHub Pages)
+1. Загрузите файлы в репозиторий GitHub.
+2. Перейдите в **Settings > Pages**.
+3. Выберите ветку `main` и нажмите **Save**.
+4. Ваше приложение будет доступно по адресу `https://ваш-логин.github.io/название-репозитория/`.
 
-**Prerequisites:**  Node.js
-
-
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## Настройка API ключа
+Для работы чата необходим ключ Gemini API. В данной версии он подтягивается из переменных окружения. При хостинге на Vercel/Netlify добавьте переменную `API_KEY`.

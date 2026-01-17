@@ -1,15 +1,14 @@
-
 import { GoogleGenAI } from "@google/genai";
 
 export class GeminiService {
-  // Always initialize a new GoogleGenAI instance right before the API call to ensure use of the most up-to-date configuration.
   async generateResponse(prompt: string, history: any[], imageBase64?: string) {
-    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+    // Используем API_KEY из окружения
+    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY as string });
+    
     try {
       const parts: any[] = [];
       
       if (imageBase64) {
-        // Extract base64 data and mime type from the data URL.
         const match = imageBase64.match(/^data:(image\/\w+);base64,(.+)$/);
         if (match) {
           parts.push({
@@ -21,16 +20,16 @@ export class GeminiService {
         }
       }
 
-      // Ensure at least one text part is provided.
       parts.push({ text: prompt || "Describe this image" });
 
-      const contents = [
-        ...history,
-        { role: 'user', parts }
-      ];
+      const contents = history.map(h => ({
+        role: h.role,
+        parts: h.parts
+      }));
+      
+      contents.push({ role: 'user', parts });
 
       const response = await ai.models.generateContent({
-        // Recommended model for general text and reasoning tasks.
         model: 'gemini-3-flash-preview',
         contents,
         config: {
@@ -38,11 +37,11 @@ export class GeminiService {
         }
       });
 
-      // The .text property is a direct property on GenerateContentResponse.
-      return response.text || "I couldn't generate a response.";
-    } catch (error) {
+      // .text — это свойство (getter), а не метод
+      return response.text || "Не удалось получить ответ.";
+    } catch (error: any) {
       console.error("Gemini API Error:", error);
-      throw error;
+      return `Ошибка: ${error.message || "Ошибка соединения с ИИ"}`;
     }
   }
 }
